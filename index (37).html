@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Download YouTube video thumbnails in HD. Paste a YouTube link or video ID to preview and save the thumbnail in seconds.">
+<title>YouTube Thumbnail Downloader - Free HD Thumbnail Tool</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#687386;--line:#e5e9f1;--primary:#e62117;--primary2:#c91810;--soft:#fff0ef;--shadow:0 16px 45px rgba(24,39,75,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line)}.nav{max-width:1080px;margin:auto;padding:17px 22px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:800;font-size:19px;letter-spacing:-.4px}.brand span{color:var(--primary)}.nav small{color:var(--muted)}
+main{max-width:900px;margin:58px auto;padding:0 20px}.hero{text-align:center;margin-bottom:30px}.eyebrow{display:inline-block;background:var(--soft);color:var(--primary2);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;border-radius:99px}.hero h1{font-size:clamp(30px,5vw,46px);line-height:1.15;letter-spacing:-1.5px;margin:16px 0 12px}.hero p{max-width:650px;margin:auto;color:var(--muted)}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:var(--shadow)}label{display:block;font-weight:700;margin-bottom:9px}.inputrow{display:flex;gap:10px}.inputrow input{flex:1;min-width:0;border:1px solid #d8deea;border-radius:11px;padding:15px 16px;font-size:15px;outline:none}.inputrow input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(230,33,23,.1)}button,.download{border:0;border-radius:11px;background:var(--primary);color:#fff;font-weight:750;padding:0 23px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:51px;font-size:15px}button:hover,.download:hover{background:var(--primary2)}.hint{font-size:13px;color:var(--muted);margin:9px 0 0}.error{display:none;color:#b42318;background:#fff1f0;border:1px solid #ffd4d0;border-radius:10px;padding:10px 13px;margin-top:14px;font-size:14px}
+.result{display:none;margin-top:25px;border-top:1px solid var(--line);padding-top:23px}.result h2{font-size:20px;margin:0 0 15px}.preview{background:#f0f2f6;border-radius:13px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:170px}.preview img{display:block;width:100%;height:auto;max-height:480px;object-fit:contain}.meta{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:13px 0 18px;color:var(--muted);font-size:13px}.actions{display:flex;flex-wrap:wrap;gap:10px}.download.secondary{background:#293449}.download.secondary:hover{background:#172033}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}.info div{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px}.info b{display:block;margin-bottom:4px}.info p{font-size:13px;color:var(--muted);margin:0}
+.content{margin-top:45px}.content h2{font-size:24px;letter-spacing:-.5px}.content p,.content li{color:#586477}.content ol{padding-left:22px}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:28px 15px;margin-top:45px;border-top:1px solid var(--line);background:#fff}
+@media(max-width:620px){main{margin:35px auto}.tool{padding:19px}.inputrow{flex-direction:column}.inputrow button{width:100%}.info{grid-template-columns:1fr}.nav small{display:none}.meta{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="brand">Thumb<span>Grab</span></div><small>Free YouTube Thumbnail Tool</small></div></header>
+<main>
+<section class="hero">
+<span class="eyebrow">Free online tool</span>
+<h1>YouTube Thumbnail Downloader</h1>
+<p>Get a video thumbnail in a few seconds. Paste a YouTube video link or ID below to preview available thumbnail sizes and save an image.</p>
+</section>
+<section class="tool" aria-label="Thumbnail downloader">
+<label for="videoInput">Paste YouTube video URL or video ID</label>
+<div class="inputrow">
+<input id="videoInput" type="text" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off">
+<button id="getBtn" type="button">Get Thumbnail</button>
+</div>
+<p class="hint">Supported links: youtube.com, youtu.be, youtube.com/shorts and YouTube embed links.</p>
+<div class="error" id="error" role="alert"></div>
+<div class="result" id="result">
+<h2>Your thumbnail is ready</h2>
+<div class="preview"><img id="thumb" alt="YouTube video thumbnail preview"></div>
+<div class="meta"><span id="quality">Thumbnail preview</span><span id="videoId"></span></div>
+<div class="actions">
+<a class="download" id="downloadBtn" href="#" target="_blank" rel="noopener">Open / Save Thumbnail</a>
+<a class="download secondary" id="newTabBtn" href="#" target="_blank" rel="noopener">Open Image in New Tab</a>
+</div>
+<p class="hint">Tip: On the image page, right-click (or long-press on mobile) and choose “Save image as”.</p>
+</div>
+</section>
+<section class="info">
+<div><b>Quick and simple</b><p>Paste a supported YouTube link and fetch its thumbnail.</p></div>
+<div><b>No sign-up</b><p>Use the tool directly in your browser without creating an account.</p></div>
+<div><b>Mobile friendly</b><p>Works on desktop, tablet and mobile browsers.</p></div>
+</section>
+<section class="content">
+<h2>How to download a YouTube thumbnail</h2>
+<ol><li>Open YouTube and copy the link of the video you need.</li><li>Paste the link into the box above.</li><li>Select “Get Thumbnail” to preview the available image.</li><li>Open the image, then save it to your device.</li></ol>
+<h2>About this tool</h2>
+<p>This browser-based tool displays publicly accessible thumbnail image files associated with a YouTube video. Image sizes depend on what the video makes available. Use thumbnails only when you have the right to use them, and respect the creator’s copyright and YouTube’s terms.</p>
+</section>
+</main>
+<footer>© <span id="year"></span> ThumbGrab. Use images responsibly.</footer>
+<script>
+const input=document.getElementById('videoInput'),btn=document.getElementById('getBtn'),errorBox=document.getElementById('error'),result=document.getElementById('result'),img=document.getElementById('thumb'),quality=document.getElementById('quality'),idText=document.getElementById('videoId'),download=document.getElementById('downloadBtn'),newTab=document.getElementById('newTabBtn');
+document.getElementById('year').textContent=new Date().getFullYear();
+function extractId(raw){
+ const value=raw.trim(); if(!value) return null;
+ if(/^[A-Za-z0-9_-]{11}$/.test(value)) return value;
+ try{
+  const u=new URL(value);
+  const host=u.hostname.replace(/^www\./,'').toLowerCase();
+  if(host==='youtu.be') return u.pathname.split('/').filter(Boolean)[0]||null;
+  if(host==='youtube.com'||host==='m.youtube.com'||host==='music.youtube.com'||host==='youtube-nocookie.com'){
+   if(u.searchParams.get('v')) return u.searchParams.get('v');
+   const parts=u.pathname.split('/').filter(Boolean);
+   if(['shorts','embed','live','v'].includes(parts[0])) return parts[1]||null;
+  }
+ }catch(e){}
+ return null;
+}
+function showError(message){errorBox.textContent=message;errorBox.style.display='block';result.style.display='none'}
+function getThumbnail(){
+ errorBox.style.display='none';
+ const id=extractId(input.value);
+ if(!id||!/^[A-Za-z0-9_-]{11}$/.test(id)){showError('Please enter a valid YouTube video URL or 11-character video ID.');return}
+ result.style.display='block';idText.textContent='Video ID: '+id;quality.textContent='Checking available image size…';
+ const sizes=['maxresdefault','sddefault','hqdefault','mqdefault','default'];let index=0;
+ function tryNext(){
+  if(index>=sizes.length){showError('No thumbnail image could be loaded for this video. Check the video ID and try again.');return}
+  const url='https://img.youtube.com/vi/'+id+'/'+sizes[index]+'.jpg';const current=sizes[index++];
+  const test=new Image();
+  test.onload=()=>{if(test.naturalWidth<=120&&current!=='default'){tryNext();return}img.src=url;quality.textContent='Image size: '+current;download.href=url;download.download='youtube-thumbnail-'+id+'.jpg';newTab.href=url};
+  test.onerror=tryNext;test.src=url;
+ }
+ tryNext();
+}
+btn.addEventListener('click',getThumbnail);
+input.addEventListener('keydown',e=>{if(e.key==='Enter')getThumbnail()});
+</script>
+</body>
+</html>
